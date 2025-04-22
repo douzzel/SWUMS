@@ -1,8 +1,6 @@
 <?php
-require_once 'includes/config.php';
-
-$auth = new Auth();
-$auth->logout();
-
-header("Location: login.php");
+//logout.php  
+session_start();
+session_destroy();
+header("Location: ..");
 exit();

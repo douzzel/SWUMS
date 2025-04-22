@@ -2,7 +2,7 @@
 
     <footer class="bg-dark text-white mt-5 py-3">
         <div class="container text-center">
-            <p>&copy; <?= date('Y') ?> <?= SITE_NAME ?>. All rights reserved.</p>
+            <p>&copy; <?= date('Y') ?> Graphene-BSM, LTD. All rights reserved.</p>
         </div>
     </footer>
 

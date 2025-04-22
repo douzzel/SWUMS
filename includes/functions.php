@@ -1,8 +1,7 @@
+# File: c:\Users\douzz\Downloads\SWUMS\includes\functions.php
 <?php
-function getWebsiteStatus($websiteId)
+function getWebsiteStatus($websiteId, $db)
 {
-    global $db;
-
     $stmt = $db->prepare("SELECT status FROM status_checks WHERE website_id = ? ORDER BY checked_at DESC LIMIT 1");
     $stmt->bind_param("i", $websiteId);
     $stmt->execute();
@@ -11,10 +10,8 @@ function getWebsiteStatus($websiteId)
     return $result->num_rows > 0 ? $result->fetch_assoc()['status'] : 'unknown';
 }
 
-function getUptimePercentage($websiteId, $days = 30)
+function getUptimePercentage($websiteId, $days = 30, $db)
 {
-    global $db;
-
     $stmt = $db->prepare("SELECT 
                           COUNT(*) as total_checks,
                           SUM(status = 'up') as up_checks
@@ -27,10 +24,8 @@ function getUptimePercentage($websiteId, $days = 30)
     return $result['total_checks'] > 0 ? round(($result['up_checks'] / $result['total_checks']) * 100, 2) : 0;
 }
 
-function checkWebsiteAccess($userId, $websiteId)
+function checkWebsiteAccess($userId, $websiteId, $db)
 {
-    global $db;
-
     // Admins have access to everything
     $auth = new Auth();
     if ($auth->isAdmin()) {
@@ -45,10 +40,8 @@ function checkWebsiteAccess($userId, $websiteId)
     return $result->num_rows > 0;
 }
 
-function getAccessibleWebsites($userId)
+function getAccessibleWebsites($userId, $db)
 {
-    global $db;
-
     $auth = new Auth();
     if ($auth->isAdmin()) {
         $query = "SELECT w.id, w.name, w.url FROM websites w";
