@@ -10,7 +10,7 @@ This implementation provides the following features:
 - SHA256 password hashing,
 - Cron job integration (through the use of [easycron](https://www.easycron.com/), but can be set for any cronjob tool or even locally).
 
-> _(this solution was initially created for deployment on [infinityfree free hosting](https://www.infinityfree.com/))_
+> _(this solution was initially created for deployment on [infinityfree free hosting](https://www.infinityfree.com/), but should work elsewhere too)_
 
 &nbsp;
 
@@ -27,24 +27,22 @@ This implementation provides the following features:
 3. Configure:
 
 > - Edit includes/config.php with your database credentials
-> - Set BASE*URL to your InfinityFree URL (e.g., *`https://your-site.epizy.com`\_)
 
 4. Install:
 
-> - Visit install.php in your browser
-> - Follow the installation wizard to set up the database and create an admin account
+> - Visit the base URL for your installation/deployment (the system will detect if it has already been installed or not and direct you to the installer as needed)
+> - Things _MUST_ be set in the configuration file before this as the installer will only ask for credentials to create an admin account (using the config file to set up the database automatically) [this might be updated in the future]
 
 5. Set Up Cron Job:
 
 > - Use an external service like EasyCron
-> - Set up a job to call _`https://your-site.epizy.com/cron/checker.php?secret_key=YOUR_SECRET_KEY`_
+> - Set up a job to call _`https://<your-site>.com/cron/checker.php?secret_key=YOUR_SECRET_KEY`_
 > - Set the interval (e.g., every 30 minutes)
-> - Change YOUR_SECRET_KEY in cron/checker.php to a long random string
+> - Change YOUR_SECRET_KEY in cron/checker.php to a long random string or your prefered hash
 
 6. Secure:
 
 > - Consider password protecting the admin/ directory via .htaccess
-> - Change default admin password after installation
 
 &nbsp;
 
